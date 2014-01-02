@@ -8,8 +8,8 @@ Code is tested with Kafka 0.8.0
 Install On Broker
 ------------
 
-1. Build the `kafka-http-metrics-reporter-uber-1.0.0.jar` jar using `mvn package`.
-2. Copy the jar kafka-http-metrics-reporter-uber-1.0.0.jar to the libs/
+1. Build the `kafka-http-metrics-reporter-1.0.0-uber.jar` jar using `mvn package`.
+2. Copy the jar kafka-http-metrics-reporter-1.0.0-uber.jar to the libs/
    directory of your kafka broker installation
 3. Configure the broker (see the configuration section below)
 4. Restart the broker
@@ -19,13 +19,12 @@ Configuration
 
 Edit the `server.properties` file of your installation, activate the reporter by setting:
 
+```
     kafka.metrics.reporters=nl.techop.kafka.KafkaHttpMetricsReporter[,kafka.metrics.KafkaCSVMetricsReporter[,....]]
     kafka.http.metrics.reporter.enabled=true
-
-Here is a list of default properties used:
-
     kafka.http.metrics.host=localhost
     kafka.http.metrics.port=8080
+```
 
 URL List
 ------------
@@ -44,6 +43,6 @@ Usage Examples
 ### Curl
 
 ```bash
-curl -XGET -H "Content-type: application/json" -H "Accept: application/json" "http://localhost:8080/api/metrics"
+   curl -XGET -H "Content-type: application/json" -H "Accept: application/json" "http://localhost:8080/api/metrics"
 
 ```

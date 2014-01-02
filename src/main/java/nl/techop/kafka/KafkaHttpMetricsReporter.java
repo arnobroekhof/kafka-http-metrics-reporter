@@ -1,60 +1,70 @@
 package nl.techop.kafka;
 
 import com.yammer.metrics.core.MetricPredicate;
+import kafka.metrics.KafkaMetricsConfig;
 import kafka.metrics.KafkaMetricsReporter;
 import kafka.utils.VerifiableProperties;
 import org.apache.log4j.Logger;
 
 /**
- * KafkaMonitoringRestApi
- * nl.techop.kafka.monitoring
+ * KafkaHttpMetricsReporter
+ * nl.techop.kafka
  * User: arnobroekhof
  * Date: 31-12-13
  * Time: 14:18
  */
 public class KafkaHttpMetricsReporter implements KafkaMetricsReporter, KafkaHttpMetricsReporterMBean {
 
-  static Logger LOG = Logger.getLogger(KafkaHttpMetricsReporter.class);
-  boolean initialized = false;
-  boolean running = false;
-  private KafkaHttpMetricsServer uiServer = null;
-  private long defaultPort = 8080;
+  private static Logger LOG = Logger.getLogger(KafkaHttpMetricsReporter.class);
+  private boolean initialized = false;
+  private boolean running = false;
+  private boolean enabled = false;
 
+  private KafkaHttpMetricsServer metricsServer = null;
 
-  MetricPredicate predicate = MetricPredicate.ALL;
+  private static final int DEFAULT_PORT = 8080;
+  private static final String DEFAULT_BIND_ADDRESS = "localhost";
+
+  private String bindAddress = DEFAULT_BIND_ADDRESS;
+  private int port = DEFAULT_PORT;
+
 
   @Override
   public void init(VerifiableProperties verifiableProperties) {
     if (! initialized) {
-      uiServer = new KafkaHttpMetricsServer(defaultPort);
-      LOG.info("Initializing Kafka Rest API");
+      KafkaMetricsConfig metricsConfig = new KafkaMetricsConfig(verifiableProperties);
 
+      bindAddress = verifiableProperties.getProperty("kafka.http.metrics.host");
+      port = Integer.parseInt(verifiableProperties.getProperty("kafka.http.metrics.port"));
+      enabled = Boolean.parseBoolean(verifiableProperties.getProperty("kafka.http.metrics.reporter.enabled"));
 
+      metricsServer = new KafkaHttpMetricsServer(bindAddress,port);
       initialized = true;
-      startReporter(8080);
+
+      startReporter(metricsConfig.pollingIntervalSecs());
     } else {
-      LOG.error("Kafka RestAPI already initialized");
+      LOG.error("Kafka Http Metrics Reporter already initialized");
     }
   }
 
   @Override
-  public synchronized void startReporter(long port) {
-    if (initialized && !running) {
-      LOG.info("Starting Kafka Rest API on port: " + Long.toString(port));
-      uiServer.start();
+  public synchronized void startReporter(long pollingPeriodSecs) {
+    if (initialized && !running && enabled) {
+      metricsServer.start();
       running = true;
     } else {
-      LOG.error("Kafka Rest API already running");
+      if ( ! enabled ) {
+        LOG.info("Kafka Http Metrics Reporter disabled");
+      } else if ( running ) {
+        LOG.error("Kafka Http Metrics Reporter already running");
+      }
     }
   }
 
   @Override
   public synchronized void stopReporter() {
     if ( initialized && running) {
-      LOG.info("Stopping Kafka REST API");
-      uiServer.stop();
-    } else {
-      LOG.info("Unable to stop Kafka REST API");
+      metricsServer.stop();
     }
   }
 

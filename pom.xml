@@ -6,8 +6,12 @@
 
     <groupId>nl.techop.kafka</groupId>
     <artifactId>kafka-http-metrics-reporter</artifactId>
-    <version>1.0.0version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
+    <scm>
+        <connection>scm:git:git://github.com/arnobroekhof/kafka-http-metrics-reporter.git</connection>
+        <url>https://github.com/arnobroekhof/kafka-http-metrics-reporter</url>
+    </scm>
 
     <dependencies>
         <dependency>

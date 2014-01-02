@@ -7,6 +7,8 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
+import java.net.InetSocketAddress;
+
 /**
  * KafkaHttpMetricsServer
  * nl.techop.kafka
@@ -18,11 +20,21 @@ public class KafkaHttpMetricsServer {
 
   private static final Logger LOG = Logger.getLogger(KafkaHttpMetricsServer.class);
   private Server server;
+  private int port;
+  private String bindAddress;
 
-  public KafkaHttpMetricsServer(long port) {
+  public KafkaHttpMetricsServer(String bindAddress, int port) {
 
-    LOG.info("Initializing Kafka Http Metrics Reporter on port: " + port);
-    server = new Server((int)port);
+    this.port = port;
+    this.bindAddress = bindAddress;
+    init();
+
+  }
+
+  private void init() {
+    LOG.info("Initializing Kafka Http Metrics Reporter");
+    InetSocketAddress inetSocketAddress = new InetSocketAddress(bindAddress,port);
+    server = new Server(inetSocketAddress);
 
     ServletContextHandler servletContextHandler = new ServletContextHandler();
 
@@ -34,13 +46,14 @@ public class KafkaHttpMetricsServer {
     servletContextHandler.addServlet(new ServletHolder(new PingServlet()), "/api/ping");
 
     server.setHandler(servletContextHandler);
-
+    LOG.info("Finished initializing Kafka Http Metrics Reporter");
   }
 
   public void start() {
     try {
       LOG.info("Starting Kafka Http Metrics Reporter");
       server.start();
+      LOG.info("Started Kafka Http Metrics Reporter on: " + bindAddress +":"+ port);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -50,6 +63,7 @@ public class KafkaHttpMetricsServer {
     try {
       LOG.info("Stopping Kafka Http Metrics Reporter");
       server.stop();
+      LOG.info("Kafka Http Metrics Reporter stopped");
     } catch (Exception e) {
       e.printStackTrace();
     }
