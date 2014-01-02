@@ -1,3 +1,4 @@
+
 package nl.techop.kafka;
 
 
@@ -33,7 +34,7 @@ public class KafkaHttpMetricsServer {
 
   private void init() {
     LOG.info("Initializing Kafka Http Metrics Reporter");
-    InetSocketAddress inetSocketAddress = new InetSocketAddress(bindAddress,port);
+    InetSocketAddress inetSocketAddress = new InetSocketAddress(bindAddress, port);
     server = new Server(inetSocketAddress);
 
     ServletContextHandler servletContextHandler = new ServletContextHandler();
@@ -53,7 +54,7 @@ public class KafkaHttpMetricsServer {
     try {
       LOG.info("Starting Kafka Http Metrics Reporter");
       server.start();
-      LOG.info("Started Kafka Http Metrics Reporter on: " + bindAddress +":"+ port);
+      LOG.info("Started Kafka Http Metrics Reporter on: " + bindAddress + ":" + port);
     } catch (Exception e) {
       e.printStackTrace();
     }

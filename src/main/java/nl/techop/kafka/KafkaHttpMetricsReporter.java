@@ -1,6 +1,5 @@
 package nl.techop.kafka;
 
-import com.yammer.metrics.core.MetricPredicate;
 import kafka.metrics.KafkaMetricsConfig;
 import kafka.metrics.KafkaMetricsReporter;
 import kafka.utils.VerifiableProperties;
@@ -31,14 +30,14 @@ public class KafkaHttpMetricsReporter implements KafkaMetricsReporter, KafkaHttp
 
   @Override
   public void init(VerifiableProperties verifiableProperties) {
-    if (! initialized) {
+    if (!initialized) {
       KafkaMetricsConfig metricsConfig = new KafkaMetricsConfig(verifiableProperties);
 
       bindAddress = verifiableProperties.getProperty("kafka.http.metrics.host");
       port = Integer.parseInt(verifiableProperties.getProperty("kafka.http.metrics.port"));
       enabled = Boolean.parseBoolean(verifiableProperties.getProperty("kafka.http.metrics.reporter.enabled"));
 
-      metricsServer = new KafkaHttpMetricsServer(bindAddress,port);
+      metricsServer = new KafkaHttpMetricsServer(bindAddress, port);
       initialized = true;
 
       startReporter(metricsConfig.pollingIntervalSecs());
@@ -53,9 +52,9 @@ public class KafkaHttpMetricsReporter implements KafkaMetricsReporter, KafkaHttp
       metricsServer.start();
       running = true;
     } else {
-      if ( ! enabled ) {
+      if (!enabled) {
         LOG.info("Kafka Http Metrics Reporter disabled");
-      } else if ( running ) {
+      } else if (running) {
         LOG.error("Kafka Http Metrics Reporter already running");
       }
     }
@@ -63,7 +62,7 @@ public class KafkaHttpMetricsReporter implements KafkaMetricsReporter, KafkaHttp
 
   @Override
   public synchronized void stopReporter() {
-    if ( initialized && running) {
+    if (initialized && running) {
       metricsServer.stop();
     }
   }
