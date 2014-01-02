@@ -5,6 +5,8 @@ This is a http metrics reporter for kafka using
 Jetty with the metrics servlets (http://metrics.codahale.com/manual/servlets/kafka )
 Code is tested with Kafka 0.8.0
 
+[![Travis Build Status](https://secure.travis-ci.org/arnobroekhof/kafka-http-metrics-reporter.png)](http://travis-ci.org/arnobroekhof/kafka-http-metrics-reporter)
+
 Install On Broker
 ------------
 
