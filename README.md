@@ -35,7 +35,7 @@ URL List
 | /api/healthcheck | HealthCheckServlet responds to GET requests by running all the [health checks](#health-checks) and returning 501 Not Implemented if no health checks are registered, 200 OK if all pass, or 500 Internal Service Error if one or more fail. The results are returned as a human-readable text/plain entity. |
 | /api/metrics | exposes the state of the metrics in a particular registry as a JSON object. |
 | /api/ping | responds to GET requests with a text/plain/200 OK response of pong. This is useful for determining liveness for load balancers, etc. |
-| /threads | responds to GET requests with a text/plain representation of all the live threads in the JVM, their states, their stack traces, and the state of any locks they may be waiting for. |
+| api/threads | responds to GET requests with a text/plain representation of all the live threads in the JVM, their states, their stack traces, and the state of any locks they may be waiting for. |
 
 Usage Examples
 ------------
