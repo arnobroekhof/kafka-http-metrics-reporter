@@ -88,7 +88,6 @@
         <dependency>
             <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
-            <scope>provided</scope>
             <version>0.3</version>
         </dependency>
 
