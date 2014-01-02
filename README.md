@@ -2,7 +2,8 @@ Kafka Http Metrics Reporter
 ==============================
 
 This is a http metrics reporter for kafka using
-Jetty with the metrics servlets (http://metrics.codahale.com/manual/servlets/kafka )
+Jetty with the metrics servlets (http://metrics.codahale.com/manual/servlets/kafka ) for exposing the metrics as JSON Objects.
+Instead of retrieving metrics through JMX with JConsole it is now possible to retrieve the metrics with curl or some other http / rest client.
 Code is tested with Kafka 0.8.0
 
 [![Travis Build Status](https://secure.travis-ci.org/arnobroekhof/kafka-http-metrics-reporter.png)](http://travis-ci.org/arnobroekhof/kafka-http-metrics-reporter)
