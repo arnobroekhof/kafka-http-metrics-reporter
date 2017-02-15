@@ -25,9 +25,9 @@ import org.apache.log4j.Logger;
 
 /**
  * Class KafkaHttpMetricsReporter
- * <p/>
+ * &lt;p/&gt;
  * Author: arnobroekhof
- * <p/>
+ * &lt;p/&gt;
  * Purpose: Main class that is being called by Kafka on startup. This Class is also repsonsible for looking up the
  * metric settings as configured in the kafka server.properties file en based on those settings it starts the
  * embedded Jetty Server with the CodaStale servlets attached to it.

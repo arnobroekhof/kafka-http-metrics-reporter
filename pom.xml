@@ -25,7 +25,7 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_2.10</artifactId>
+            <artifactId>kafka_2.11</artifactId>
             <version>${kafka.version}</version>
         </dependency>
 
@@ -126,7 +126,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kafka.version>0.8.0</kafka.version>
+        <kafka.version>0.8.2.1</kafka.version>
         <log4j.version>1.2.15</log4j.version>
         <slf4j.version>1.6.4</slf4j.version>
         <snappy-java.version>1.0.4.1</snappy-java.version>
@@ -220,6 +220,10 @@
                                 <includes>
                                     <include>*:*</include>
                                 </includes>
+                                <excludes>
+                                    <exclude>org.apache.kafka:*</exclude>
+                                    <exclude>log4j:*</exclude>
+                                </excludes>
                             </artifactSet>
                             <minimizeJar>true</minimizeJar>
                             <filters>
