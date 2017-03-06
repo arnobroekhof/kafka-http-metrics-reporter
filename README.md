@@ -11,8 +11,8 @@ Code is tested with Kafka 2.12-0.10.2.0
 Install On Broker
 ------------
 
-1. Build the `kafka-http-metrics-reporter-0.10.2.0-uber.jar` jar using `mvn package`.
-2. Copy the jar kafka-http-metrics-reporter-0.10.2.0-uber.jar to the libs/
+1. Build the `kafka-http-metrics-reporter-0.10.2.0-final.jar` jar using `mvn package` or download [here](https://github.com/arnobroekhof/kafka-http-metrics-reporter/archive/kafka_2.12-0.10.2.0.zip) .
+2. Copy the jar kafka-http-metrics-reporter-0.10.2.0-final.jar to the libs/
    directory of your kafka broker installation
 3. Configure the broker (see the configuration section below)
 4. Restart the broker
