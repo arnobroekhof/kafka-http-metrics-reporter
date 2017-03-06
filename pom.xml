@@ -6,7 +6,7 @@
 
     <groupId>nl.techop.kafka</groupId>
     <artifactId>kafka-http-metrics-reporter</artifactId>
-    <version>1.0.0</version>
+    <version>0.10.2.0</version>
     <packaging>jar</packaging>
 
     <licenses>
@@ -25,7 +25,7 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_2.11</artifactId>
+            <artifactId>kafka_2.12</artifactId>
             <version>${kafka.version}</version>
         </dependency>
 
@@ -83,7 +83,7 @@
         <dependency>
             <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
-            <version>0.3</version>
+            <version>${zkclient.version}</version>
         </dependency>
 
         <dependency>
@@ -126,17 +126,17 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kafka.version>0.8.2.1</kafka.version>
-        <log4j.version>1.2.15</log4j.version>
-        <slf4j.version>1.6.4</slf4j.version>
-        <snappy-java.version>1.0.4.1</snappy-java.version>
+        <kafka.version>0.10.2.0</kafka.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <snappy-java.version>1.1.2.6</snappy-java.version>
         <metrics-core.version>2.2.0</metrics-core.version>
-        <zkclient.version>0.3</zkclient.version>
-        <zookeeper.version>3.3.4</zookeeper.version>
-        <jetty.version>8.1.4.v20120524</jetty.version>
-        <junit.version>4.8.2</junit.version>
-        <shaded.name>uber</shaded.name>
-
+        <zkclient.version>0.10</zkclient.version>
+        <zookeeper.version>3.4.9</zookeeper.version>
+        <jetty.version>9.2.15.v20160210</jetty.version>
+        <junit.version>4.12</junit.version>
+        <shaded.name>final</shaded.name>
+        <java.version>1.8</java.version>
     </properties>
 
     <build>
@@ -145,8 +145,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
@@ -220,10 +220,6 @@
                                 <includes>
                                     <include>*:*</include>
                                 </includes>
-                                <excludes>
-                                    <exclude>org.apache.kafka:*</exclude>
-                                    <exclude>log4j:*</exclude>
-                                </excludes>
                             </artifactSet>
                             <minimizeJar>true</minimizeJar>
                             <filters>

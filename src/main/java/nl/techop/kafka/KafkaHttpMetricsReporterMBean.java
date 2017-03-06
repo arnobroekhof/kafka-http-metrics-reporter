@@ -1,6 +1,6 @@
 /*
  * *
- *  * Copyright 2014, arnobroekhof@gmail.com
+ *  * Copyright 2016, arnobroekhof@gmail.com
  *  *
  *  * Licensed under the Apache License, Version 2.0 (the "License");
  *  * you may not use this file except in compliance with the License.
@@ -22,12 +22,9 @@ import kafka.metrics.KafkaMetricsReporterMBean;
 
 /**
  * Interface: KafkaHttpMetricsReporterMBean
- * &lt;p/&gt;
  * Author: arnobroekhof
- * &lt;p/&gt;
  * Purpose: Extending the KafkaMetricsReporterMBean
  */
 public interface KafkaHttpMetricsReporterMBean extends
         KafkaMetricsReporterMBean {
-
 }
