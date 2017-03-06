@@ -1,7 +1,6 @@
-
 /*
  * *
- *  * Copyright 2014, arnobroekhof@gmail.com
+ *  * Copyright 2016, arnobroekhof@gmail.com
  *  *
  *  * Licensed under the Apache License, Version 2.0 (the "License");
  *  * you may not use this file except in compliance with the License.
@@ -43,19 +42,17 @@ public class KafkaHttpMetricsServer {
 
     /**
      * Method: KafkaHttpMetricsServer
-     * Purpose: Method for constructing the the metrics server.
+     * Purpose: Method for constructing the metrics server.
      *
      * @param bindAddress the name or address to bind on ( defaults to localhost )
      * @param port            the port to bind on ( defaults to 8080 )
      */
-    public KafkaHttpMetricsServer(String bindAddress, int port) {
+    public KafkaHttpMetricsServer(final String bindAddress, final int port) {
 
         this.port = port;
         this.bindAddress = bindAddress;
 
-        // call init
-        init();
-
+        this.init();
     }
 
     /**

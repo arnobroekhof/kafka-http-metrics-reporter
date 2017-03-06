@@ -1,6 +1,6 @@
 /*
  * *
- *  * Copyright 2014, arnobroekhof@gmail.com
+ *  * Copyright 2016, arnobroekhof@gmail.com
  *  *
  *  * Licensed under the Apache License, Version 2.0 (the "License");
  *  * you may not use this file except in compliance with the License.
@@ -91,7 +91,6 @@ public class KafkaHttpMetricsReporter implements KafkaMetricsReporter, KafkaHttp
             metricsServer.stop();
         }
     }
-
 
     @Override
     public String getMBeanName() {
