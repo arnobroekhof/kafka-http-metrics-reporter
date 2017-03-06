@@ -30,11 +30,11 @@ import java.net.InetSocketAddress;
 
 /**
  * Class KafkaHttpMetricsServer
- * <p/>
+ * &lt;p/&gt;
  * Author: arnobroekhof
- * <p/>
+ * &lt;p/&gt;
  * Purpose: Class for starting a Embedded Jetty server with the codahale metrics servlets loaded
- * <p/>
+ * &lt;p/&gt;
  * Interfaces: None
  */
 public class KafkaHttpMetricsServer {
@@ -46,7 +46,7 @@ public class KafkaHttpMetricsServer {
 
   /**
    * Method: KafkaHttpMetricsServer
-   * <p/>
+   * &lt;p/&gt;
    * Purpose: Method for constructing the the metrics server.
    *
    * @param bindAddress the name or address to bind on ( defaults to localhost )
@@ -64,7 +64,7 @@ public class KafkaHttpMetricsServer {
 
   /**
    * Method: init
-   * <p/>
+   * &lt;p/&gt;
    * Purpose: Initializes the embedded Jetty Server with including the metrics servlets.
    */
   private void init() {
@@ -96,7 +96,7 @@ public class KafkaHttpMetricsServer {
 
   /**
    * Method: start
-   * <p/>
+   * &lt;p/&gt;
    * Purpose: starting the metrics server
    */
   public void start() {
@@ -113,7 +113,7 @@ public class KafkaHttpMetricsServer {
 
   /**
    * Method: stop
-   * <p/>
+   * &lt;p/&gt;
    * Purpose: Stopping the metrics server
    */
   public void stop() {
