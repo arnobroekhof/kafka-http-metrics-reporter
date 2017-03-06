@@ -30,103 +30,96 @@ import java.net.InetSocketAddress;
 
 /**
  * Class KafkaHttpMetricsServer
- * <p/>
  * Author: arnobroekhof
- * <p/>
  * Purpose: Class for starting a Embedded Jetty server with the codahale metrics servlets loaded
- * <p/>
  * Interfaces: None
  */
 public class KafkaHttpMetricsServer {
 
-  private static final Logger LOG = Logger.getLogger(KafkaHttpMetricsServer.class);
-  private Server server;
-  private int port;
-  private String bindAddress;
+    private static final Logger LOG = Logger.getLogger(KafkaHttpMetricsServer.class);
+    private Server server;
+    private int port;
+    private String bindAddress;
 
-  /**
-   * Method: KafkaHttpMetricsServer
-   * <p/>
-   * Purpose: Method for constructing the the metrics server.
-   *
-   * @param bindAddress the name or address to bind on ( defaults to localhost )
-   * @param port            the port to bind on ( defaults to 8080 )
-   */
-  public KafkaHttpMetricsServer(String bindAddress, int port) {
+    /**
+     * Method: KafkaHttpMetricsServer
+     * Purpose: Method for constructing the the metrics server.
+     *
+     * @param bindAddress the name or address to bind on ( defaults to localhost )
+     * @param port            the port to bind on ( defaults to 8080 )
+     */
+    public KafkaHttpMetricsServer(String bindAddress, int port) {
 
-    this.port = port;
-    this.bindAddress = bindAddress;
+        this.port = port;
+        this.bindAddress = bindAddress;
 
-    // call init
-    init();
+        // call init
+        init();
 
-  }
-
-  /**
-   * Method: init
-   * <p/>
-   * Purpose: Initializes the embedded Jetty Server with including the metrics servlets.
-   */
-  private void init() {
-    LOG.info("Initializing Kafka Http Metrics Reporter");
-
-    // creating the socket address for binding to the specified address and port
-    InetSocketAddress inetSocketAddress = new InetSocketAddress(bindAddress, port);
-
-    // create new Jetty server
-    server = new Server(inetSocketAddress);
-
-    // creating the servlet context handler
-    ServletContextHandler servletContextHandler = new ServletContextHandler();
-
-    // setting the context path
-    servletContextHandler.setContextPath("/");
-
-    // adding the codahale metrics servlet to the servlet context
-    servletContextHandler.addServlet(new ServletHolder(new AdminServlet()), "/api");
-    servletContextHandler.addServlet(new ServletHolder(new MetricsServlet()), "/api/metrics");
-    servletContextHandler.addServlet(new ServletHolder(new ThreadDumpServlet()), "/api/threads");
-    servletContextHandler.addServlet(new ServletHolder(new HealthCheckServlet()), "/api/healthcheck");
-    servletContextHandler.addServlet(new ServletHolder(new PingServlet()), "/api/ping");
-
-    // adding the configured servlet context handler to the Jetty Server
-    server.setHandler(servletContextHandler);
-    LOG.info("Finished initializing Kafka Http Metrics Reporter");
-  }
-
-  /**
-   * Method: start
-   * <p/>
-   * Purpose: starting the metrics server
-   */
-  public void start() {
-    try {
-      LOG.info("Starting Kafka Http Metrics Reporter");
-
-      // starting the Jetty Server
-      server.start();
-      LOG.info("Started Kafka Http Metrics Reporter on: " + bindAddress + ":" + port);
-    } catch (Exception e) {
-      e.printStackTrace();
     }
-  }
 
-  /**
-   * Method: stop
-   * <p/>
-   * Purpose: Stopping the metrics server
-   */
-  public void stop() {
-    try {
-      LOG.info("Stopping Kafka Http Metrics Reporter");
+    /**
+     * Method: init
+     * Purpose: Initializes the embedded Jetty Server with including the metrics servlets.
+     */
+    private void init() {
+        LOG.info("Initializing Kafka Http Metrics Reporter");
 
-      // stopping the Jetty Server
-      server.stop();
-      LOG.info("Kafka Http Metrics Reporter stopped");
-    } catch (Exception e) {
-      e.printStackTrace();
+        // creating the socket address for binding to the specified address and port
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(bindAddress, port);
+
+        // create new Jetty server
+        server = new Server(inetSocketAddress);
+
+        // creating the servlet context handler
+        ServletContextHandler servletContextHandler = new ServletContextHandler();
+
+        // setting the context path
+        servletContextHandler.setContextPath("/");
+
+        // adding the codahale metrics servlet to the servlet context
+        servletContextHandler.addServlet(new ServletHolder(new AdminServlet()), "/api");
+        servletContextHandler.addServlet(new ServletHolder(new MetricsServlet()), "/api/metrics");
+        servletContextHandler.addServlet(new ServletHolder(new ThreadDumpServlet()), "/api/threads");
+        servletContextHandler.addServlet(new ServletHolder(new HealthCheckServlet()), "/api/healthcheck");
+        servletContextHandler.addServlet(new ServletHolder(new PingServlet()), "/api/ping");
+
+        // adding the configured servlet context handler to the Jetty Server
+        server.setHandler(servletContextHandler);
+        LOG.info("Finished initializing Kafka Http Metrics Reporter");
     }
-  }
+
+    /**
+     * Method: start
+     * Purpose: starting the metrics server
+     */
+    public void start() {
+        try {
+            LOG.info("Starting Kafka Http Metrics Reporter");
+
+            // starting the Jetty Server
+            server.start();
+            LOG.info("Started Kafka Http Metrics Reporter on: " + bindAddress + ":" + port);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method: stop
+     * Purpose: Stopping the metrics server
+     */
+    public void stop() {
+        try {
+            LOG.info("Stopping Kafka Http Metrics Reporter");
+
+            // stopping the Jetty Server
+            server.stop();
+            LOG.info("Kafka Http Metrics Reporter stopped");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 
