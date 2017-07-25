@@ -170,8 +170,6 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <shadedArtifactAttached>true</shadedArtifactAttached>
-                            <shadedClassifierName>${shaded.name}</shadedClassifierName>
                             <artifactSet>
                                 <includes>
                                     <include>*:*</include>
