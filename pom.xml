@@ -6,7 +6,7 @@
 
     <groupId>nl.techop.kafka</groupId>
     <artifactId>kafka-http-metrics-reporter</artifactId>
-    <version>0.10.2.0</version>
+    <version>0.10.2.1</version>
     <packaging>jar</packaging>
 
     <licenses>
