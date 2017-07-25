@@ -18,14 +18,18 @@
 
 package nl.techop.kafka;
 
-
-import com.yammer.metrics.reporting.*;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
 import java.net.InetSocketAddress;
+
+import com.yammer.metrics.reporting.AdminServlet;
+import com.yammer.metrics.reporting.HealthCheckServlet;
+import com.yammer.metrics.reporting.MetricsServlet;
+import com.yammer.metrics.reporting.PingServlet;
+import com.yammer.metrics.reporting.ThreadDumpServlet;
 
 /**
  * Class KafkaHttpMetricsServer
